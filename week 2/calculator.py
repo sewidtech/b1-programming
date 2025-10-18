@@ -23,12 +23,21 @@ division = (Revenue / Cost)
 
 display_results = bool(input("Do you want to see the results? (yes/no): "))
 
+
+
+
+
 if choice == 1:Revenue
 print("The result is:" ,Revenue)
 if choice == 2:Cost
 print("The result is:" ,Cost)
 if choice == 3:Profit
 print("The result is:" ,Profit)
+
+
+margin = (Profit / Revenue) * 100
+if display_results:
+    print(f"Profit Margin: {margin:.2f}%")
 
 
 

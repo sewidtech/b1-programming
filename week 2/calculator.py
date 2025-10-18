@@ -37,7 +37,9 @@ print("The result is:" ,Profit)
 
 margin = (Profit / Revenue) * 100
 if display_results:
-    
+
+  #DISPLAY RESULTS
+
    print("\n--- Financial Summary ---")
 print(f"Revenue: ${Revenue:,.2f}")
 print(f"Costs: ${Cost:,.2f}")

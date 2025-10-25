@@ -3,7 +3,7 @@ print("Welcome to the secure system.")
 
 
 entered_pin = ""
-correct_pin = 1234
+correct_pin = "1234"
 max_attempts = 3
 attempts = 0
 

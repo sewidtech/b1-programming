@@ -27,13 +27,6 @@ divide = number1 / number2
 
 
 
-if Choice in ('1') :sum = number1 + number2
-if Choice in ('2') :subtract = number1 - number2
-if Choice in ('3') :multiply = number1 * number2
-if Choice in ('4') :divide = number1 / number2
-
-
-
 
 if Choice == '1':print(result := f"{number1} + {number2} = {sum}")
 if Choice == '2':print(result := f"{number1} - {number2} = {subtract}")

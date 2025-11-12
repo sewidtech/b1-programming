@@ -71,7 +71,7 @@ def main():
         choice = input("Choose (1-3): ")
 
         if choice == '1':
-            password = input("Enter password of your choice: ")
+            password = input("\nEnter password of your choice: ")
         elif choice == '2':
             password = generate_random_password()
             print(f"\nGenerated password: {password}")
@@ -86,11 +86,11 @@ def main():
         valid, results = validate_password(password)
         print("\nValidation Results:")
         for rule, passed in results.items():
-            status = " Passed" if passed else " Failed"
+            status = "Passed" if passed else "Failed"
             print(f"{rule} : {status}")
 
         if valid:
-            print(" Congratulations, your password is valid!\n")
+            print("\nCongratulations, your password is valid!")
         else:
             print(" Invalid password, try again.\n")
 main()            

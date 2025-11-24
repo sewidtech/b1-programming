@@ -6,9 +6,6 @@ print("checking login attempts...")
 
 #tracking login attempts
 
-
-
-
 login_attempts = [
     ("alice", "success"),
     ("bob", "failed"),

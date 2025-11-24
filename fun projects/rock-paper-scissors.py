@@ -58,7 +58,7 @@ def main():
 
 
 
-        leaderboard ={k: v for  k , v in sorted(scores.items() , key=lambda item :item[1], reverse = True)}        
+        leaderboard ={k: v for  k , v in sorted(scores.items() , key=lambda item :item[1], reverse = True)} 
         print(f"\nLeaderboard:")
 
         for player, score in leaderboard.items():

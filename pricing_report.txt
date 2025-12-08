@@ -1,0 +1,7 @@
+Product Name                     Base Price   Discount %   Discount $  Final Price
+------------------------------------------------------------------------------------------
+Laptop                         $    1200.00        10.0% $     120.00 $    1080.00
+Winter Jacket                  $     150.00         0.0% $       0.00 $     150.00
+Python Book                    $      30.00         0.0% $       0.00 $      30.00
+Coffee Machine                 $      80.00         0.0% $       0.00 $      80.00
+Wireless Headphones            $     220.00        10.0% $      22.00 $     198.00

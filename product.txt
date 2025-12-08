@@ -1,0 +1,5 @@
+Laptop,1200,Electronics,Premium
+Winter Jacket,150,Clothing,Standard
+Python Book,30,Books,Budget
+Coffee Machine,80,Home,Premium
+Wireless Headphones,220,Electronics,Standard

@@ -1,0 +1,10 @@
+2025-12-12 18:50:30.893965 - alice - logged in successfully
+2025-12-12 18:50:56.806607 - yehia - logged in successfully
+2025-12-12 18:52:15.956128 - yehia - logged in successfully
+2025-12-12 18:54:28.985977 - yehia - failed login attempt 1
+2025-12-12 18:54:32.588970 - yehia - failed login attempt 2
+2025-12-12 18:54:34.734485 - yehia - failed login attempt 3
+2025-12-12 18:54:34.734965 - yehia - account locked due to failed attempts
+2025-12-12 19:01:44.575689 - yehia - failed login attempt 1
+2025-12-12 19:01:50.082990 - yehia - logged in successfully
+2025-12-12 19:03:40.050466 - yehia - logged in successfully

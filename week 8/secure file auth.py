@@ -3,84 +3,87 @@ import hashlib
 from datetime import datetime
 from getpass import getpass
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+VALID_PRIVILEGES = {"admin", "owner", "member"}
 
 class User:
-    def __init__(self, username, password, privilege, attempts=0, status="active"):
-        self.username = username
-        self._hash_password = self._hash(password)
-        self.privilege_level = privilege
-        self.login_attempts = attempts
-        self.account_status = status
+    def __init__(self, username, password, privilege):
+        if privilege not in VALID_PRIVILEGES:
+            raise ValueError("Invalid privilege level")
 
-    def _hash(self, password):
+        self.username = username
+        self.__password_hash = self.__hash(password)
+        self.__privilege_level = privilege
+        self.__login_attempts = 0
+        self.__account_status = "active"
+
+    def __hash(self, password):
         return hashlib.sha256(password.encode()).hexdigest()
 
-    def lock_account(self):
-        self.account_status = "locked"
+    def get_privilege(self):
+        return self.__privilege_level
 
-    def reset_login_attempts(self):
-        self.login_attempts = 0
+    def get_status(self):
+        return self.__account_status
 
-    def log_activity(self, message):
+    def get_attempts(self):
+        return self.__login_attempts
+
+    def __lock_account(self):
+        self.__account_status = "locked"
+
+    def __reset_attempts(self):
+        self.__login_attempts = 0
+
+    def __log_activity(self, message):
         with open("tracking_file.txt", "a") as f:
             f.write(f"{datetime.now()} - {self.username} - {message}\n")
 
     def authenticate(self, username_input, password_input):
+        if self.__account_status != "active":
+            logging.warning("Account inactive")
+            self.__log_activity("login blocked (inactive)")
+            return False
+
         if username_input != self.username:
-            print("Username not found.")
+            logging.warning("Invalid username")
             return False
 
-        if self.account_status != "active":
-            logging.warning(f"Account {self.username} not active.")
-            self.log_activity("attempted login but account inactive")
-            return None
-
-        if self._hash(password_input) == self._hash_password:
-            self.reset_login_attempts()
-            logging.info(f"User {self.username} authenticated successfully.")
-            self.log_activity("logged in successfully")
+        if self.__hash(password_input) == self.__password_hash:
+            self.__reset_attempts()
+            logging.info("Authentication successful")
+            self.__log_activity("login successful")
             return True
-        else:
-            self.login_attempts += 1
-            logging.warning(f"Failed login attempt {self.login_attempts} for {self.username}")
-            self.log_activity(f"failed login attempt {self.login_attempts}")
 
-            if self.login_attempts >= 3:
-                self.lock_account()
-                logging.error(f"Account {self.username} is now locked")
-                self.log_activity("account locked due to failed attempts")
+        self.__login_attempts += 1
+        logging.warning(f"Failed login attempt {self.__login_attempts}")
+        self.__log_activity(f"failed login attempt {self.__login_attempts}")
 
-            return False
+        if self.__login_attempts >= 3:
+            self.__lock_account()
+            logging.error("Account locked")
+            self.__log_activity("account locked")
 
-    def file(self):
-        with open("file_log.txt", "a") as f:
-            f.write(
-                f"{datetime.now()} - USER: {self.username} | "
-                f"PRIV: {self.privilege_level} | "
-                f"ATTEMPTS: {self.login_attempts} | "
-                f"STATUS: {self.account_status}\n"
-            )
+        return False
+
 
 if __name__ == "__main__":
-    user1 = User(username="yehia", password="mypassword", privilege="admin")
+    users = [
+        User("yehia", "mypassword", "admin"),
+        User("mike", "password123", "member")
+    ]
+    print("Welcome to system.\n")
+    username_input = input("Username: ")
+    password_input = getpass("Password: ")
 
-    while True:
-        username_input = input("Please enter your username: ")
-        password_input = getpass("Please enter your password: ")
-        result = user1.authenticate(username_input, password_input)
+    user = next((u for u in users if u.username == username_input), None)
 
-        if result is True:
-            print("Login successful!")
-            user1.file()
-            break
-        elif result is False:
-            print(f"Login failed! Attempt {user1.login_attempts}")
-            if user1.account_status == "locked":
-                print("Your account is now locked.")
-                user1.file()
-                break
-        else:
-            print("Account not active.")
-            user1.file()
-            break
+    if user and user.authenticate(username_input, password_input):
+        print("Login successful")
+        print(f"Privilege level: {user.get_privilege()}")
+    else:
+        print("Login failed")

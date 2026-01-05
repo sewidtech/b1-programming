@@ -3,6 +3,7 @@ import hashlib
 from datetime import datetime
 from getpass import getpass
 
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"

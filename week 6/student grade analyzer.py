@@ -5,9 +5,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-# ----------------------------------------------------
-# DISCOUNT FUNCTION
-# ----------------------------------------------------
+
 def calculate_discount(category, tier):
     category_discounts = {
         "Electronics": 10,
@@ -25,9 +23,7 @@ def calculate_discount(category, tier):
     return category_discounts.get(category, 0) + tier_discounts.get(tier, 0)
 
 
-# ----------------------------------------------------
-# MAIN PROCESSING FUNCTION
-# ----------------------------------------------------
+
 def process_products(input_file, output_file):
     try:
         products = []
@@ -95,8 +91,6 @@ def process_products(input_file, output_file):
         print(f"Unexpected error: {e}")
 
 
-# ----------------------------------------------------
-# RUN PROGRAM
-# ----------------------------------------------------
+
 if __name__ == "__main__":
     process_products("product.txt", "pricing_report.txt")

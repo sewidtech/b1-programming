@@ -21,9 +21,9 @@ class Device:
         self.__is_active = True
         self.__access_log = []
 
-    # ----- Access Control -----
+    
     def authorize_access(self, user, action):
-        self.check_compliance()  # Ensure compliance is updated
+        self.check_compliance()  
 
         if not self.__is_active or self.__compliance_status != "pass":
             self.__access_log.append((user.get_username(), action, "Denied", datetime.now()))
@@ -59,7 +59,7 @@ class Device:
         else:
             return Level[2]
 
-    # ----- Security / Compliance -----
+    
     def run_security_scan(self):
         self.__last_security_check = datetime.now()
         logging.info(f"Security scan completed for device {self.__device_id}")
@@ -123,7 +123,7 @@ class DeviceManager:
     def generate_security_report(self):
         report = []
         for d in self.devices:
-            # Assign to variables to avoid greyed-out code in IDEs
+            
             device_id = d.get_device_id()
             device_type = d.get_device_type()
             firmware = d.get_firmware_version()
